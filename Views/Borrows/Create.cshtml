@@ -1,0 +1,77 @@
+﻿@model Library.Models.Borrows
+
+@{
+    ViewBag.Title = "Create";
+}
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+<link href="~/Content/css/select2.css" rel="stylesheet" />
+<script src="~/Scripts/select2.js"></script>
+<div class="IndxCrtBook">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                @Html.Label("Member Name")
+
+                @Html.DropDownList("Memb_ID", null, htmlAttributes: new { @class = "form-control drpmemb" })
+                @Html.ValidationMessageFor(model => model.Memb_ID, "", new { @class = "text-danger" })
+
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Book Name")
+
+                @Html.DropDownList("Book_id", null, htmlAttributes: new { @class = "form-control drpbook" })
+                @Html.ValidationMessageFor(model => model.Book_id, "", new { @class = "text-danger" })
+
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Due_date)
+
+                @Html.EditorFor(model => model.Due_date, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Due_date, "", new { @class = "text-danger" })
+
+            </div>
+
+
+            @Html.LabelFor(model => model.Issue, new { htmlAttributes = new { @class = "form-control" } })
+            <div class="form-group">
+
+                @Html.TextAreaFor(model => model.Issue, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Issue, "", new { @class = "text-danger" })
+
+            </div>
+
+
+
+            <div class="form-group">
+
+                <input type="submit" value="Add" class="btn btn-success" />
+
+            </div>
+        </div>
+    }
+</div>
+<p>
+    <button onclick="location.href='@Url.Action("Index", "Borrows")';return false;" class="btn btn-block btn-primary">Back to list</button>
+</p>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+<script>
+    $(document).ready(function () {
+
+        $(".drpbook").select2();
+        $(".drpmemb").select2();
+    })
+</script>

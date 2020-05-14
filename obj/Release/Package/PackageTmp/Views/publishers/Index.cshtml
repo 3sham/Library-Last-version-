@@ -1,0 +1,90 @@
+﻿@model IEnumerable<Library.Models.publisher>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+<div id="NewPub" class="IndxBook ">
+    @using (Ajax.BeginForm("Create", new AjaxOptions()
+    {
+        UpdateTargetId = "NewPub",
+        HttpMethod = "Post",
+        InsertionMode = InsertionMode.Replace
+
+
+    }))
+    {
+        <div class="IndxCrtBook">
+
+            <div class="form-horizontal">
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.Label("Publisher Name")
+
+                    @Html.Editor("pub_name", new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessage("Pub_Name", "", new { @class = "text-danger" })
+
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Address")
+
+                    @Html.Editor("pub_address", new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessage("Address", "", new { @class = "text-danger" })
+
+                </div>
+
+                <div class="form-group">
+
+                    <input type="submit" value="Add" class="btn btn-success" />
+
+                </div>
+            </div>
+        </div>
+    }
+
+    @*<p>
+            <button onclick="location.href='@Url.Action("Create", "publishers")';return false;" class="btn btn-primary">Add Book</button>
+        </p>*@
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Pub_Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Pub_Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Pub_Id }) |
+
+
+                    @Html.ActionLink("Details", "Details", new { id = item.Pub_Id }) |
+                    @Ajax.ActionLink("Delete", "DeletePub", new { id = item.Pub_Id },new AjaxOptions() {
+
+                       UpdateTargetId="NewPub",
+                       HttpMethod="Get",
+                       InsertionMode=InsertionMode.Replace
+
+                     })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

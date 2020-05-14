@@ -1,0 +1,99 @@
+﻿@model IEnumerable<Library.Models.Borrows>
+@using (Ajax.BeginForm("Search", "Borrows", new AjaxOptions() { UpdateTargetId = "IndxBook", HttpMethod = "post", InsertionMode = InsertionMode.Replace }))
+{
+    <div class="col-xs-8 ">
+        <div class="input-group">
+            <div class="input-group-btn search-panel">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    <span id="search_concept">Filter by</span> <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="#MemberName">Member Name</a></li>
+                    <li><a href="#BookName">Book Title</a></li>
+
+                </ul>
+            </div>
+            <input type="hidden" name="searchparam" value="all" id="search_param">
+            <input type="text" class="form-control" name="searchTerm" placeholder="Search term...">
+            <span class="">
+                <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+            </span>
+        </div>
+    </div>
+}
+
+@if (User.IsInRole("Admins"))
+{
+    <p>
+        <button onclick="location.href='@Url.Action("AddMultiBorrows", "Borrows")';return false;" class="btn btn-primary">Add new Borrow</button>
+    </p>
+}
+<table class="table table-bordered table-striped text-center">
+    <tr>
+        <th class="text-center">
+            @Html.DisplayNameFor(model => model.Member.Name)
+        </th>
+        <th class="text-center">
+            @Html.DisplayNameFor(model => model.Book.Title)
+        </th>
+
+        <th class="text-center">
+            @Html.DisplayNameFor(model => model.Due_date)
+        </th>
+        <th class="text-center">
+            @Html.DisplayNameFor(model => model.Return_date)
+        </th>
+        <th class="text-center">
+            @Html.DisplayNameFor(model => model.Issue)
+        </th>
+        <th class="text-center">Control</th>
+        <th class="text-center">Nodification</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Member.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Book.Title)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Due_date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Return_date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Issue)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Borro_ID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Borro_ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Borro_ID })
+            </td>
+            <td>
+                @if (item.Return_date < DateTime.Now.Date)
+                {
+                    <p class="text-danger">Date of return are expired</p>
+                }
+
+            </td>
+        </tr>
+    }
+
+</table>
+
+<script>
+    $(document).ready(function (e) {
+        $('.search-panel .dropdown-menu').find('a').click(function (e) {
+            e.preventDefault();
+            var param = $(this).attr("href").replace("#", "");
+            var concept = $(this).text();
+            $('.search-panel span#search_concept').text(concept);
+            $('.input-group #search_param').val(param);
+        });
+    });
+</script>

@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+
+<div id="main-div">
+    <div class="clearfix">&nbsp;</div>
+    <div class="clearfix">&nbsp;</div>
+   
+    <div class="IndxBook">
+        <a href="@Url.Action("Add", "Members")" id="Add" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i>&nbsp;Add New Member</a>
+        <br /><br />
+        <div id="div-record">
+            @Html.Partial("_Detail")
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="Add-Model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">New Member</h4>
+                </div>
+                <div class="divForAdd">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="Edit-Model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Update Member</h4>
+                </div>
+                <div class="divForUpdate">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

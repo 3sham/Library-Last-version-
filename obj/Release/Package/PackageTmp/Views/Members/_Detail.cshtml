@@ -1,0 +1,72 @@
+﻿@model IList<Library.Models.Member>
+<div class="table-responsive">
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Phone</th>
+                <th>Member Date</th>
+                <th>Expiry Date</th>
+                <th>Member Type</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Phone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Memb_Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Expiry_Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Memb_Type)
+                </td>
+                <td>
+                    <a href="@Url.Action("Edit", "Members", new { id = item.Memb_ID })" class="editDialog">
+                        <i class="fafa-pencil-square-o"></i>&nbsp;Edit
+                    </a>
+                </td>
+                <td>
+                    @Ajax.ActionLink("Delete", "Delete", "Members", new { @id = item.Memb_ID }, new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "div-record" }, new { @class = "fa fa-trash-o" })
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<script>
+    $(document).ready(function () {
+        $('#Add').click(function (event) {
+            event.preventDefault();
+            $.get(this.href, function (response) {
+                $('.divForAdd').html(response);
+            });
+            $('#Add-Model').modal({
+                backdrop: 'static',
+            }, 'show');
+        });
+        $('.editDialog').click(function (event) {
+            event.preventDefault();
+            $.get(this.href, function (response) {
+                $('.divForUpdate').html(response);
+            });
+            $('#Edit-Model').modal({
+                backdrop: 'static',
+            }, 'show');
+        });
+    });
+</script>

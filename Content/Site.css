@@ -1,0 +1,263 @@
+﻿body{
+    padding-bottom:20px;
+    padding-top:30px;
+}
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.newnav {
+    background-color: lightsteelblue;
+    border: solid 1px lightsteelblue;
+}
+
+.newbrand, .newimg {
+    float: left;
+}
+.newimg
+{
+    margin-top: -12px;
+    margin-right : 10px;
+
+}
+.navbar-inverse .navbar-nav > li > a, .navbar-inverse .navbar-brand {
+    color: black;
+    font-family:'Bodoni MT';
+    font-weight:bold;
+    font-size:20px;
+}
+.navbar-inverse .navbar-brand
+{
+    color:black;
+    font-weight:bold;
+    font-size:25px;
+
+}
+.index {
+
+  background-image: url('../images/chuttersnap-PVO_tj2APuM-unsplash.jpg');
+  background-size:cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  max-width: 200%;
+  height: 90vh;
+}
+
+.conct
+{
+
+    margin-top:200px;
+   margin-bottom:100px;
+    font-size:55px;
+}
+.contact_social_icons ul li a {
+    font-size: 24px;
+    color: #b1b1b1;
+    padding-right: 46px;
+    margin-top:50px;
+}
+
+.contact_social_icons ul li a:hover{
+    color: #1ba974;
+}
+
+.bg-light {
+    background-color: #f8f9fa!important;
+}
+
+
+.aboutus-section {
+    padding: 90px 0;
+   
+}
+.aboutus-title {
+    font-size: 30px;
+    letter-spacing: 0;
+    line-height: 32px;
+    margin: 0 0 39px;
+    padding: 0 0 11px;
+    position: relative;
+    text-transform: uppercase;
+    color: #000;
+}
+.aboutus-title::after {
+    background: #b0c4de none repeat scroll 0 0;
+    bottom: 0;
+    content: "";
+    height: 2px;
+    left: 0;
+    position: absolute;
+    width: 54px;
+}
+.aboutus-text {
+    color: #606060;
+    font-size: 13px;
+    line-height: 22px;
+    margin: 0 0 35px;
+}
+
+a:hover, a:active {
+    color: #ffb901;
+    text-decoration: none;
+    outline: 0;
+}
+.aboutus-more {
+    border: 1px solid #b0c4de;
+    border-radius: 25px;
+    color: #b0c4de;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0;
+    padding: 7px 20px;
+    text-transform: uppercase;
+}
+.feature .feature-box .iconset {
+    background: #fff none repeat scroll 0 0;
+    float: left;
+    position: relative;
+    width: 18%;
+}
+.feature .feature-box .iconset::after {
+    background: #b0c4de none repeat scroll 0 0;
+    content: "";
+    height: 150%;
+    left: 43%;
+    position: absolute;
+    top: 100%;
+    width: 1px;
+}
+
+.feature .feature-box .feature-content h4 {
+    color: #0f0f0f;
+    font-size: 18px;
+    letter-spacing: 0;
+    line-height: 22px;
+    margin: 0 0 5px;
+}
+
+
+.feature .feature-box .feature-content {
+    float: left;
+    padding-left: 28px;
+    width: 78%;
+}
+.feature .feature-box .feature-content h4 {
+    color: #0f0f0f;
+    font-size: 18px;
+    letter-spacing: 0;
+    line-height: 22px;
+    margin: 0 0 5px;
+}
+.feature .feature-box .feature-content p {
+    color: #606060;
+    font-size: 13px;
+    line-height: 22px;
+}
+.icon {
+    color : #f4b841;
+    padding:0px;
+    font-size:40px;
+    border: 1px solid #b0c4de;
+    border-radius: 100px;
+    color: #b0c4de;
+    font-size: 28px;
+    height: 70px;
+    line-height: 70px;
+    text-align: center;
+    width: 70px;
+}
+
+ .log
+ {
+     max-width: 320px;
+    margin: 0 auto;
+       margin-top:100px;
+   margin-bottom:100px;
+   
+ }
+ .IndxBook , .IndxCrtBook
+ {
+     
+    margin: 0 auto;
+    margin-top:80px;
+    margin-bottom:100px;
+   
+ }
+ .IndxCrtBook
+ {
+     max-width: 320px;
+      margin-bottom:20px;
+ }
+
+
+/* start section price table */
+
+.price {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: #b0c4de;
+    
+}
+
+.price_box {
+    background-color: #FFF;
+    padding: 10px;
+    
+    border: 1px solid #DDD;
+    margin-bottom: 15px;
+    border-radius: 10%
+}
+
+.price .price_box p {
+    color: #b0c4de;
+    width: 60px;
+    font-weight: bold;
+    height: 60px;
+    background: #b0c4de;
+    border-radius: 50%;
+    line-height: 60px;
+    font-size: 13px;
+    color: black;
+    -webkit-transtion-duration: 0.7s;
+    -moz-transtion-duration: 0.7s;
+    -o-transtion-duration: 0.7s;
+    transtion-duration: 0.7s;
+}
+.price .price_box img {
+    
+    width: 120px;
+ 
+    height: 100px;
+   
+    -webkit-transtion-duration: 0.7s;
+    -moz-transtion-duration: 0.7s;
+    -o-transtion-duration: 0.7s;
+    transtion-duration: 0.7s;
+}
+
+/* end section price table */
+.search {
+    
+    position: absolute;
+    top:3%;
+    left: 35%;
+    margin-left: -50px;
+    
+    margin-top: 50px;
+    
+}

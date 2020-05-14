@@ -1,0 +1,96 @@
+﻿
+@model PagedList.IPagedList<Library.Models.Member>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+<link href="~/Content/css/select2.css" rel="stylesheet" />
+<script src="~/Scripts/select2.js"></script>
+@using (Html.BeginForm("Index", "Members"))
+{
+    <p>
+        @Html.Label("Find by name : ")
+        @Html.DropDownList("SearchString", null, htmlAttributes: new { @class = "form-control drpmem" })
+
+        <input type="submit" value="Search" />
+    </p>
+}
+<div class="table-responsive">
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th> @Html.ActionLink("Name", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })</th>
+                <th>@Html.ActionLink("Address", "Index", new { sortOrder = ViewBag.AddressSortParm, currentFilter = ViewBag.CurrentFilter })</th>
+                <th>Phone</th>
+                <th>@Html.ActionLink("Member Date", "Index", new { sortOrder = ViewBag.DueDateSortParm, currentFilter = ViewBag.CurrentFilter })</th>
+                <th>@Html.ActionLink("Expiry Date", "Index", new { sortOrder = ViewBag.EndDateSortParm, currentFilter = ViewBag.CurrentFilter })</th>
+                <th>@Html.ActionLink("Member Type", "Index", new { sortOrder = ViewBag.TypeSortParm, currentFilter = ViewBag.CurrentFilter })</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Address)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Phone)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Memb_Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Expiry_Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Memb_Type)
+                    </td>
+                    <td>
+                        <a href="@Url.Action("Edit", "Members", new { id = item.Memb_ID })" class="editDialog">
+                            <i class="fafa-pencil-square-o"></i>&nbsp;Edit
+                        </a>
+                    </td>
+                    <td>
+                        @Ajax.ActionLink("Delete", "Delete", "Members", new { @id = item.Memb_ID }, new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "div-record" }, new { @class = "fa fa-trash-o" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+<script>
+    $(document).ready(function () {
+        $('#Add').click(function (event) {
+            event.preventDefault();
+            $.get(this.href, function (response) {
+                $('.divForAdd').html(response);
+            });
+            $('#Add-Model').modal({
+                backdrop: 'static',
+            }, 'show');
+        });
+        $('.editDialog').click(function (event) {
+            event.preventDefault();
+            $.get(this.href, function (response) {
+                $('.divForUpdate').html(response);
+            });
+            $('#Edit-Model').modal({
+                backdrop: 'static',
+            }, 'show');
+
+
+        });
+        $(".drpmem").select2();
+    });
+</script>

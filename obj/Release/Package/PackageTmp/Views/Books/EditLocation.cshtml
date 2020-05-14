@@ -1,0 +1,71 @@
+﻿@model Library.Models.Locations
+
+@{
+    ViewBag.Title = "EditLocation";
+}
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+<div class="IndxCrtBook">
+    <h2>EditLocation</h2>
+
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Loc_ID)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Floor)
+
+            @Html.DropDownListFor(model => model.Floor, ViewData["listforFloor"] as List<SelectListItem>, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Floor, "", new { @class = "text-danger" })
+
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Area)
+
+            @Html.DropDownListFor(model => model.Area, ViewData["listforArea"] as List<SelectListItem>, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Area, "", new { @class = "text-danger" })
+
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Room)
+
+            @Html.DropDownListFor(model => model.Room, ViewData["listforRoom"] as List<SelectListItem>, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Room, "", new { @class = "text-danger" })
+
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Section)
+
+            @Html.DropDownListFor(model => model.Section, ViewData["listforSection"] as List<SelectListItem>, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Section, "", new { @class = "text-danger" })
+
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.shelf)
+
+            @Html.DropDownListFor(model => model.shelf, ViewData["listforShelf"] as List<SelectListItem>, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.shelf, "", new { @class = "text-danger" })
+
+        </div>
+
+        <div class="form-group">
+
+            <input type="submit" value="Save" class="btn btn-success" />
+
+        </div>
+    </div>
+</div>
+}
+
+<p>
+    <button onclick="location.href='@Url.Action("Index", "Books")';return false;" class="btn btn-block btn-primary">Back to list</button>
+</p>

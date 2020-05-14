@@ -1,0 +1,84 @@
+﻿@model Library.Models.Books
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+
+<div class="IndxCrtBook">
+
+    @using (Html.BeginForm("Edit", "Books", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Book_ID)
+        @Html.HiddenFor(model => model.Loc_id)
+        <div class="form-group">
+            @Html.Label("Publisher Name")
+
+            @Html.DropDownList("Pub_id", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Pub_id, "", new { @class = "text-danger" })
+
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title)
+
+            @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Price)
+
+            @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+
+        </div>
+
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Amount)
+
+            @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
+
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Author)
+
+            @Html.EditorFor(model => model.Author, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Author, "", new { @class = "text-danger" })
+
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ImagePath)
+
+
+            <input id="ImagePath" title="Upload a product image" type="file" name="file" />
+
+        </div>
+        <div class="form-group">
+
+            <input type="submit" value="Save" class="btn btn-success" />
+
+        </div>
+    </div>
+    }
+
+ </div>
+<p>
+    <button onclick="location.href='@Url.Action("Index", "Books")';return false;" class="btn btn-block btn-primary">Back to list</button>
+</p>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }

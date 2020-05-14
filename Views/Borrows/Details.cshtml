@@ -1,0 +1,58 @@
+﻿@model Library.Models.Borrows
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Borrows</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Book.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Book.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Member.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Member.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Due_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Due_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Return_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Return_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Issue)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Issue)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Borro_ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

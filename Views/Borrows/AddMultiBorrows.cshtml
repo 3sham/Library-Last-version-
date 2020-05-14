@@ -1,0 +1,178 @@
+﻿@model Library.Models.Borrows
+
+@{
+    ViewBag.Title = "AddMultiBorrows";
+}
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+<link href="~/Content/css/select2.css" rel="stylesheet" />
+<script src="~/Scripts/select2.js"></script>
+<div class="IndxCrtBook">
+    @using (Ajax.BeginForm("AddMulitBorrows", "Borrows", new AjaxOptions() { UpdateTargetId = "lstBooks", HttpMethod = "Post", InsertionMode = InsertionMode.InsertAfter }))
+    {
+        @Html.AntiForgeryToken()
+
+
+
+        <div class="form-horizontal">
+
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                @Html.Label("Member Name")
+
+                @Html.DropDownList("Memb_ID", null, htmlAttributes: new { @class = "form-control drpmemb" ,@id= "txtMemName" })
+                @Html.ValidationMessageFor(model => model.Memb_ID, "", new { @class = "text-danger" })
+
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Book Name")
+
+                @Html.DropDownList("Book_id",null, htmlAttributes: new { @class = "form-control drpbook" , @id = "txtBookName" })
+                @Html.ValidationMessageFor(model => model.Book_id, "", new { @class = "text-danger" })
+
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Due_date)
+
+                @Html.EditorFor(model => model.Due_date, new { htmlAttributes = new { @class = "form-control"  , @id = "txtDueDate" } })
+                @Html.ValidationMessageFor(model => model.Due_date, "", new { @class = "text-danger" })
+
+            </div>
+
+
+            @Html.LabelFor(model => model.Issue, new { htmlAttributes = new { @class = "form-control" } })
+            <div class="form-group">
+
+                @Html.TextAreaFor(model => model.Issue, new { htmlAttributes = new { @class = "form-control" , @id = "txtIssue" } })
+                @Html.ValidationMessageFor(model => model.Issue, "", new { @class = "text-danger" })
+
+            </div>
+
+
+
+            <div class="form-group">
+
+                <input type="button" value="Add" class="btn btn-success"  id="btnAdd"/>
+                <input type="button" id="btnSave" class="btn btn-success" value="Save All" />
+            </div>
+        </div>
+
+    }
+</div>
+<table id="tblBorrows" class="table table-bordered" cellpadding="0" cellspacing="0">
+    <thead>
+        <tr>
+            <th style="width:150px">Member Name</th>
+            <th style="width:150px">Book Name</th>
+            <th style="width:150px">Due Date</th>
+            <th style="width:150px">Issue</th>
+           <th>Remove</th>
+        </tr>
+    </thead>
+    <tbody>
+           
+                
+            
+        </tbody>
+    
+</table>
+<p>
+    <button onclick="location.href='@Url.Action("Index", "Borrows")';return false;" class="btn btn-block btn-primary">Back to list</button>
+</p>
+
+<script type="text/javascript">
+    $("body").on("click", "#btnAdd", function () {
+        
+        var txtMemName = $("#txtMemName");
+        var txtBookName = $("#txtBookName");
+        var txtDueDate = $("#txtDueDate");
+        var txtIssue = $("#Issue");
+
+        
+        var tBody = $("#tblBorrows > TBODY")[0];
+
+        //Add Row.
+        var row = tBody.insertRow(-1);
+
+     
+        var cell = $(row.insertCell(-1));
+        cell.html(txtMemName.val());
+
+        
+        cell = $(row.insertCell(-1));
+        cell.html(txtBookName.val());
+
+        cell = $(row.insertCell(-1));
+        cell.html(txtDueDate.val());
+
+        cell = $(row.insertCell(-1));
+        cell.html(txtIssue.val());
+
+        
+        cell = $(row.insertCell(-1));
+        var btnRemove = $("<input />");
+        btnRemove.attr("type", "button");
+        btnRemove.attr("class", "btn btn-primary");
+        btnRemove.attr("onclick", "Remove(this);");
+        btnRemove.val("Remove");
+        cell.append(btnRemove);
+
+        //Clear the TextBoxes.
+       
+        txtBookName.val("");
+        txtDueDate.val("");
+        txtIssue.val("");
+    });
+
+    function Remove(button) {
+        //Determine the reference of the Row using the Button.
+        var row = $(button).closest("TR");
+        var name = $("TD", row).eq(0).html();
+        if (confirm("Do you want to delete: " + name)) {
+            //Get the reference of the Table.
+            var table = $("#tblBorrows")[0];
+
+            //Delete the Table row using it's Index.
+            table.deleteRow(row[0].rowIndex);
+        }
+    };
+
+    $("body").on("click", "#btnSave", function () {
+        //Loop through the Table rows and build a JSON array.
+        var borrows = new Array();
+        $("#tblBorrows TBODY TR").each(function () {
+            var row = $(this);
+            var borrow = {};
+            borrow.Memb_ID = row.find("TD").eq(0).html();
+            borrow.Book_id = row.find("TD").eq(1).html();
+            borrow.Due_date = row.find("TD").eq(2).html();
+            borrow.Due_date = borrow.Due_date;
+            borrow.Issue = row.find("TD").eq(3).html();
+            borrows.push(borrow);
+        });
+
+        //Send the JSON array to Controller using AJAX.
+        $.ajax({
+            type: "POST",
+            url: "/Borrows/AddMultiBorrows",
+            data: JSON.stringify(borrows),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (r) {
+                if (r.result == 'Redirect')
+                    window.location = r.url;
+            }
+            
+        });
+    });
+</script>
+<script>
+    $(document).ready(function () {
+
+        $(".drpbook").select2();
+        $(".drpmemb").select2();
+    })
+</script>

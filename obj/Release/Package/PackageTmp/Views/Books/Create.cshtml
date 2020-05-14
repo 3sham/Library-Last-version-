@@ -1,0 +1,99 @@
+﻿@model Library.Models.BookLocation
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<div class="IndxCrtBook">
+   
+
+    @using (Html.BeginForm("Create","Books",FormMethod.Post,new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.Label("Publisher Name")
+
+            @Html.DropDownList("Pub_id", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Book.Pub_id, "", new { @class = "text-danger" })
+
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Book.Title)
+
+            @Html.EditorFor(model => model.Book.Title, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Book.Title, "", new { @class = "text-danger" })
+
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Book.Price)
+
+            @Html.EditorFor(model => model.Book.Price, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Book.Price, "", new { @class = "text-danger" })
+
+        </div>
+
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Book.Amount)
+
+            @Html.EditorFor(model => model.Book.Amount, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Book.Amount, "", new { @class = "text-danger" })
+
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Book.Author)
+
+            @Html.EditorFor(model => model.Book.Author, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Book.Author, "", new { @class = "text-danger" })
+
+        </div>
+
+
+
+        <div class="form-group">
+            @Html.Label("Location")
+
+            @Html.DropDownListFor(model => model.Location.Floor, ViewData["listforFloor"] as List<SelectListItem>, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Location.Floor, "", new { @class = "text-danger" })
+            @Html.DropDownListFor(model => model.Location.Area, ViewData["listforArea"] as List<SelectListItem>, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Location.Area, "", new { @class = "text-danger" })
+            @Html.DropDownListFor(model => model.Location.Room, ViewData["listforRoom"] as List<SelectListItem>, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Location.Room, "", new { @class = "text-danger" })
+            @Html.DropDownListFor(model => model.Location.Section, ViewData["listforSection"] as List<SelectListItem>, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Location.Section, "", new { @class = "text-danger" })
+            @Html.DropDownListFor(model => model.Location.shelf, ViewData["listforShelf"] as List<SelectListItem>, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Location.shelf, "", new { @class = "text-danger" })
+
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Book.ImagePath)
+
+
+            <input id="ImagePath" title="Upload a product image" type="file" name="file" />
+            @Html.ValidationMessageFor(model => model.Book.ImagePath, "", new { @class = "text-danger" })
+
+        </div>
+        <div class="form-group">
+
+            <input type="submit" value="Add" class="btn btn-success" />
+
+        </div>
+    </div>
+    }
+
+  
+</div>
+<p>
+    <button onclick="location.href='@Url.Action("Index", "Books")';return false;" class="btn btn-block btn-primary">Back to list</button>
+</p>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,12 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+
+@{
+    ViewBag.Title = "Error";
+}
+<div class="IndxCrtBook">
+    <h1 class="text-danger">Error.</h1>
+    <h2 class="text-danger">@ViewBag.err</h2>
+</div>
+<p>
+    <button onclick="location.href='@Url.Action("Index",ViewData["page"])';return false;" class="btn btn-block btn-primary">Back to list</button>
+</p>
